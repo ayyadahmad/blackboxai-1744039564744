@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - ArtFolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'bebas': ['Bebas Neue', 'cursive']
+                    },
+                    colors: {
+                        neon: {
+                            purple: '#b026ff',
+                            pink: '#ff26b0',
+                            cyan: '#26ffff'
+                        }
+                    }
+                }
+            },
+            darkMode: 'class'
+        };
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .neon-glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .hover-neon:hover {
+            text-shadow: 0 0 10px currentColor;
+            transition: all 0.3s ease;
+        }
+
+        /* Skill Card Animation */
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Testimonial Slider */
+        .testimonial-slider {
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+
+        .testimonial-slide {
+            scroll-snap-align: center;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bebas text-neon-purple hover-neon">ArtFolio</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Home</a>
+                <a href="portfolio.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Portfolio</a>
+                <a href="about.html" class="text-neon-purple">About</a>
+                <a href="commission.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Commission</a>
+                <a href="blog.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Blog</a>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                <i class="fas fa-moon dark:hidden text-gray-800"></i>
+                <i class="fas fa-sun hidden dark:block text-white"></i>
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2" id="mobileMenuBtn">
+                <i class="fas fa-bars text-2xl text-gray-800 dark:text-white"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 p-4">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Home</a>
+                <a href="portfolio.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Portfolio</a>
+                <a href="about.html" class="text-neon-purple">About</a>
+                <a href="commission.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Commission</a>
+                <a href="blog.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Blog</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="pt-32 pb-16 bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-6xl font-bebas text-gray-800 dark:text-white">
+                        About <span class="text-neon-purple neon-glow">Me</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300">
+                        Digital artist specializing in emotes, digital art, and anime-style illustrations. Creating vibrant and engaging artwork that brings stories to life.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-3xl text-gray-600 dark:text-gray-300 hover:text-neon-purple transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-3xl text-gray-600 dark:text-gray-300 hover:text-neon-purple transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-3xl text-gray-600 dark:text-gray-300 hover:text-neon-purple transition-colors">
+                            <i class="fab fa-artstation"></i>
+                        </a>
+                        <a href="#" class="text-3xl text-gray-600 dark:text-gray-300 hover:text-neon-purple transition-colors">
+                            <i class="fab fa-twitch"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/7267619/pexels-photo-7267619.jpeg" 
+                         alt="Artist Profile" 
+                         class="rounded-lg shadow-2xl">
+                    <div class="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xl">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-star text-neon-purple"></i>
+                            <span class="text-gray-800 dark:text-white">5+ Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bebas text-center mb-12 text-gray-800 dark:text-white">
+                My <span class="text-neon-purple neon-glow">Skills</span>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Photoshop -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                    <i class="fab fa-adobe text-4xl text-neon-purple mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Photoshop</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Digital Painting & Photo Manipulation</p>
+                </div>
+
+                <!-- Clip Studio -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-paint-brush text-4xl text-neon-purple mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Clip Studio</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Illustration & Comic Creation</p>
+                </div>
+
+                <!-- Procreate -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-tablet-alt text-4xl text-neon-purple mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Procreate</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Digital Sketching & Painting</p>
+                </div>
+
+                <!-- After Effects -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-film text-4xl text-neon-purple mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">After Effects</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Animation & Motion Graphics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bebas text-center mb-12 text-gray-800 dark:text-white">
+                My <span class="text-neon-purple neon-glow">Journey</span>
+            </h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <!-- Timeline Item 1 -->
+                <div class="flex">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 bg-neon-purple rounded-full"></div>
+                        <div class="w-1 h-full bg-neon-purple"></div>
+                    </div>
+                    <div class="ml-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Freelance Digital Artist</h3>
+                        <p class="text-gray-600 dark:text-gray-300">2020 - Present</p>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Creating custom emotes, illustrations, and character designs for clients worldwide.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="flex">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 bg-neon-purple rounded-full"></div>
+                        <div class="w-1 h-full bg-neon-purple"></div>
+                    </div>
+                    <div class="ml-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Lead Artist at GameStudio</h3>
+                        <p class="text-gray-600 dark:text-gray-300">2018 - 2020</p>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Led a team of artists in creating game assets and character designs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="flex">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 bg-neon-purple rounded-full"></div>
+                    </div>
+                    <div class="ml-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Digital Art Education</h3>
+                        <p class="text-gray-600 dark:text-gray-300">2016 - 2018</p>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Studied Digital Arts and Animation at Creative Arts Academy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bebas text-center mb-12 text-gray-800 dark:text-white">
+                Client <span class="text-neon-purple neon-glow">Testimonials</span>
+            </h2>
+            <div class="relative">
+                <div class="testimonial-slider flex overflow-x-auto pb-8 -mx-4 px-4 space-x-6">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide flex-none w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.pexels.com/photos/7267632/pexels-photo-7267632.jpeg" 
+                                 alt="Client" 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Sarah Johnson</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Twitch Streamer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            "Amazing work on my channel emotes! The designs perfectly capture my brand's personality. Highly recommended!"
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide flex-none w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.pexels.com/photos/7267613/pexels-photo-7267613.jpeg" 
+                                 alt="Client" 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Mike Chen</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Game Developer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            "The character designs exceeded our expectations. Professional, creative, and a pleasure to work with!"
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide flex-none w-full md:w-1/2 lg:w-1/3 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.pexels.com/photos/7267617/pexels-photo-7267617.jpeg" 
+                                 alt="Client" 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Emma Davis</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Content Creator</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            "Incredible attention to detail and fast turnaround time. The artwork really brings my characters to life!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bebas text-neon-purple">ArtFolio</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Creating digital magic, one pixel at a time.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="portfolio.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Portfolio</a></li>
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">About</a></li>
+                        <li><a href="commission.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Commission</a></li>
+                        <li><a href="blog.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Social Media</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-artstation"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-twitch"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Newsletter</h4>
+                    <form class="space-y-2">
+                        <input type="email" placeholder="Enter your email" 
+                               class="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <button class="w-full px-4 py-2 bg-neon-purple text-white rounded-lg hover:shadow-lg hover:shadow-neon-purple/50 transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-gray-600 dark:text-gray-300">
+                <p>&copy; 2024 ArtFolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
