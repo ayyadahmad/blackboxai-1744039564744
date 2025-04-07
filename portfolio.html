@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ArtFolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'bebas': ['Bebas Neue', 'cursive']
+                    },
+                    colors: {
+                        neon: {
+                            purple: '#b026ff',
+                            pink: '#ff26b0',
+                            cyan: '#26ffff'
+                        }
+                    }
+                }
+            },
+            darkMode: 'class'
+        };
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .neon-glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .hover-neon:hover {
+            text-shadow: 0 0 10px currentColor;
+            transition: all 0.3s ease;
+        }
+
+        /* Portfolio Grid Styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bebas text-neon-purple hover-neon">ArtFolio</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Home</a>
+                <a href="portfolio.html" class="text-neon-purple">Portfolio</a>
+                <a href="about.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">About</a>
+                <a href="commission.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Commission</a>
+                <a href="blog.html" class="text-gray-800 dark:text-white hover:text-neon-purple dark:hover:text-neon-purple hover-neon">Blog</a>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                <i class="fas fa-moon dark:hidden text-gray-800"></i>
+                <i class="fas fa-sun hidden dark:block text-white"></i>
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2" id="mobileMenuBtn">
+                <i class="fas fa-bars text-2xl text-gray-800 dark:text-white"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 p-4">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Home</a>
+                <a href="portfolio.html" class="text-neon-purple">Portfolio</a>
+                <a href="about.html" class="text-gray-800 dark:text-white hover:text-neon-purple">About</a>
+                <a href="commission.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Commission</a>
+                <a href="blog.html" class="text-gray-800 dark:text-white hover:text-neon-purple">Blog</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Header -->
+    <section class="pt-32 pb-16 bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-6xl font-bebas text-center text-gray-800 dark:text-white mb-8">
+                My <span class="text-neon-purple neon-glow">Portfolio</span>
+            </h1>
+            <p class="text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12">
+                Explore my collection of digital artworks, including emotes, digital illustrations, and anime-style character designs.
+            </p>
+
+            <!-- Portfolio Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full bg-neon-purple text-white" data-filter="all">
+                    All Works
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-neon-purple hover:text-white transition-colors duration-300" data-filter="emotes">
+                    Emotes
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-neon-purple hover:text-white transition-colors duration-300" data-filter="digital-art">
+                    Digital Art
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-neon-purple hover:text-white transition-colors duration-300" data-filter="anime">
+                    Anime Art
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="portfolio-grid">
+                <!-- Emotes -->
+                <div class="portfolio-item" data-category="emotes">
+                    <img src="https://images.pexels.com/photos/7267602/pexels-photo-7267602.jpeg" alt="Emote Design" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Happy Emote</h3>
+                            <p class="text-gray-200">Twitch Emote</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Digital Art -->
+                <div class="portfolio-item" data-category="digital-art">
+                    <img src="https://images.pexels.com/photos/7267819/pexels-photo-7267819.jpeg" alt="Digital Artwork" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Cyber World</h3>
+                            <p class="text-gray-200">Digital Illustration</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anime Art -->
+                <div class="portfolio-item" data-category="anime">
+                    <img src="https://images.pexels.com/photos/7267852/pexels-photo-7267852.jpeg" alt="Anime Character" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Sakura</h3>
+                            <p class="text-gray-200">Character Design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more portfolio items -->
+                <!-- Emotes -->
+                <div class="portfolio-item" data-category="emotes">
+                    <img src="https://images.pexels.com/photos/7267620/pexels-photo-7267620.jpeg" alt="Emote Design" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Rage Emote</h3>
+                            <p class="text-gray-200">Discord Emote</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Digital Art -->
+                <div class="portfolio-item" data-category="digital-art">
+                    <img src="https://images.pexels.com/photos/7267626/pexels-photo-7267626.jpeg" alt="Digital Artwork" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Future City</h3>
+                            <p class="text-gray-200">Environment Design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anime Art -->
+                <div class="portfolio-item" data-category="anime">
+                    <img src="https://images.pexels.com/photos/7267622/pexels-photo-7267622.jpeg" alt="Anime Character" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 p-6">
+                            <h3 class="text-white text-xl font-semibold">Ninja</h3>
+                            <p class="text-gray-200">Character Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="portfolioModal" class="modal">
+        <div class="bg-white dark:bg-gray-800 max-w-4xl mx-4 rounded-lg overflow-hidden">
+            <div class="relative">
+                <img id="modalImage" src="" alt="" class="w-full max-h-[70vh] object-contain">
+                <button id="closeModal" class="absolute top-4 right-4 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <h3 id="modalTitle" class="text-2xl font-semibold text-gray-800 dark:text-white mb-2"></h3>
+                <p id="modalCategory" class="text-gray-600 dark:text-gray-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bebas text-neon-purple">ArtFolio</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Creating digital magic, one pixel at a time.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="portfolio.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Portfolio</a></li>
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">About</a></li>
+                        <li><a href="commission.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Commission</a></li>
+                        <li><a href="blog.html" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Social Media</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-artstation"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-neon-purple text-xl">
+                            <i class="fab fa-twitch"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-800 dark:text-white">Newsletter</h4>
+                    <form class="space-y-2">
+                        <input type="email" placeholder="Enter your email" 
+                               class="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <button class="w-full px-4 py-2 bg-neon-purple text-white rounded-lg hover:shadow-lg hover:shadow-neon-purple/50 transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-gray-600 dark:text-gray-300">
+                <p>&copy; 2024 ArtFolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Portfolio filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('bg-neon-purple', 'text-white'));
+                button.classList.add('bg-neon-purple', 'text-white');
+
+                const filter = button.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('portfolioModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const closeModal = document.getElementById('closeModal');
+
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const title = item.querySelector('h3').textContent;
+                const category = item.querySelector('p').textContent;
+
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modalTitle.textContent = title;
+                modalCategory.textContent = category;
+                modal.classList.add('active');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
